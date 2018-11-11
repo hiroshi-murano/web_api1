@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>特定の子要素を flex プロパティで固定幅に設定した状態</title>
+
+     {% load static %}
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" type="text/css" href="{% static 'app/css/bootstrap.min.css' %}" />
+    <script src="{% static 'app/js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'app/js/bootstrap.min.js' %}"></script>
+
+
+
+	<style>
+		*,
+		*:before,
+		*:after {
+			-moz-box-sizing: border-box;
+			-webkit-box-sizing: border-box;
+			box-sizing: border-box;
+		}
+
+		html,
+		body {
+			width: 100%;
+			height: 100%;
+
+			margin: 0;
+			padding: 0;
+		}
+
+		body {
+			background: #444444;
+
+			color: #cccccc;
+			font-size: 14px;
+			/* Helvetica/Arial-based sans serif stack */
+			font-family: Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+		}
+
+		.flexbox-parent {
+			width: 100%;
+			height: 100%;
+
+			display: flex;
+			flex-direction: column;
+
+			justify-content: flex-start;
+			/* align items in Main Axis */
+			align-items: stretch;
+			/* align items in Cross Axis */
+			align-content: stretch;
+			/* Extra space in Cross Axis */
+
+			background: rgba(255, 255, 255, .1);
+		}
+
+		.flexbox-item {
+			padding: 0px;
+		}
+
+		.flexbox-item-grow {
+			flex: 1;
+			/* same as flex: 1 1 auto; */
+		}
+
+		.flexbox-item.header {
+			background: rgba(255, 0, 0, .1);
+		}
+
+		.flexbox-item.footer {
+			background: rgba(0, 255, 0, .1);
+		}
+
+		.flexbox-item.content {
+			background: rgba(0, 0, 255, .1);
+		}
+
+		.fill-area {
+			display: flex;
+			flex-direction: row;
+
+			justify-content: flex-start;
+			/* align items in Main Axis */
+			align-items: stretch;
+			/* align items in Cross Axis */
+			align-content: stretch;
+			/* Extra space in Cross Axis */
+
+		}
+
+		.fill-area-content {
+			background: rgba(0, 0, 0, .3);
+			border: 1px solid #000000;
+
+			/* Needed for when the area gets squished too far and there is content that can't be displayed */
+			overflow: auto;
+		}
+
+
+		             
+		#example1 {
+  
+    		overflow: hidden;
+  		}  
+
+
+
+	</style>
+</head>
+
+<body>
+
+
+
+	<div class="flexbox-parent">
+		<div class="flexbox-item header">
+		
+  {% include 'app/navbar.html' %}
+
+  
+  <h3>{{title}}</h3>
+		</div>
+
+		<div class="flexbox-item fill-area content flexbox-item-grow">
+		<div id="example1" class="fill-area-content flexbox-item-grow">
+			</div>
+		</div>
+
+	</div>
+
+
+	
+    <script type='text/javascript'>
+
+        var example1 = document.getElementById('example1');
+
+        var hot = new Handsontable(example1, {
+        data: Handsontable.helper.createSpreadsheetData(100, 100),
+            colHeaders: true,
+            rowHeaders: true
+        });
+
+
+    </script>
+</body>
+
+</html>
